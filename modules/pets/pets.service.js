@@ -1,50 +1,55 @@
-const Queue = require('../queue/Queue');
-const store = require('../../store');
+const Queue = require('../queue/Queue')
+const store = require('../../store')
 
 // Set up initial data.
 // --------------------
 
 const pets = {
   cats: new Queue(),
-  dogs: new Queue(),
-};
+  dogs: new Queue()
+}
 
-store.cats.forEach(cat => pets.cats.enqueue(cat));
-store.dogs.forEach(dog => pets.dogs.enqueue(dog));
+store.cats.forEach(cat => pets.cats.enqueue(cat))
+store.dogs.forEach(dog => pets.dogs.enqueue(dog))
 
-// --------------------
 
 module.exports = {
+  getNext(type) {
+    if (type === 'cat') {
+      return pets.cats.show();
+    }
+    if (type === 'dog') {
+      return pets.dogs.show();
+    }
 
-  get() {
-    let newPets = {
+    let nextUp = {
       cat: pets.cats.show(),
-      dog: pets.dogs.show(),
-    };
-    return newPets;
-  },
-  
-  getCats() {
-    let newCats = {
-      cat: pets.cats.show(),
-    };
-    return newCats;
+      dog: pets.dogs.show()
+    }
+    return nextUp;
   },
 
-  getDogs() {
-    let newDogs = {
-      dog: pets.dogs.show(),
-    };
-    return newDogs;
+  // returns all pets
+  getAll(type) {
+    if (type === 'cats') {
+      return pets.cats.all()
+    } else if (type === 'dogs') {
+      return pets.dogs.all()
+    }
+    else {
+      throw error('Something went wrong!');
+    }
   },
 
   dequeue(type) {
-    // Remove a pet from the queue.
     if (type === 'cat') {
-      return pets.cats.dequeue();
+      pets.cats.dequeue();
+      return pets.cats.all();
     }
     if (type === 'dog') {
-      return pets.dogs.dequeue();
+      pets.dogs.dequeue();
+      return pets.dogs.all();
     }
-  },
+    throw error('Something went wrong please try again');
+  }
 };

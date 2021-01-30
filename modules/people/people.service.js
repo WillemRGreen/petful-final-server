@@ -1,27 +1,28 @@
-const Queue = require('../queue/Queue');
-const store = require('../../store');
+const Queue = require('../queue/Queue')
+const store = require('../../store')
 
 // Set up initial data.
 // --------------------
 
-const people = new Queue();
-store.people.forEach(person => people.enqueue(person));
+const people = new Queue()
+store.people.forEach(person => people.enqueue(person))
 
 // --------------------
 
 module.exports = {
-  get() {
-    // Return all people in the queue.
-    return people.all();
+  getAll() {
+    return people.all(people)
   },
 
-  enqueue(name) {
+  enqueue(person) {
     // Add a person to the queue.
-    return people.enqueue(name);
+    return people.enqueue(person);
   },
 
-  dequeue(person) {
+  dequeue() {
     // Remove a person from the queue.
-    return people.dequeue(person);
-  },
-};
+    // WILL ALWAYS REMOVE FROM TOP OF QUEUE!!
+    people.dequeue();
+    return people.all();
+  }
+}

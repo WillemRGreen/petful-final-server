@@ -1,3 +1,4 @@
+
 class _Node {
   constructor(value) {
     this.value = value;
@@ -17,16 +18,16 @@ class Queue {
     const node = new _Node(data);
 
     if (this.first === null) {
-      this.first = node;
+      this.first = node
     }
     if (this.last) {
       this.last.next = node;
     }
     this.last = node;
+    return node.value;
   }
 
   dequeue() {
-    // Remove some data from the queue.
     if (this.first === null) {
       return;
     }
@@ -41,20 +42,24 @@ class Queue {
 
   show() {
     // Return the next item in the queue.
+    if (!this.first === null) {
+      return null;
+    }
     return this.first.value;
   }
 
+
   all() {
     // Return all items in the queue.
-    let newArray = [];
-    let currentNode = this.first;
+    let arr = [];
+    let node = this.first;
 
-    while (currentNode) {
-      newArray.push(currentNode.value);
-      currentNode = currentNode.next;
+    while (node) {
+      arr.push(node.value);
+      node = node.next;
     }
-    return newArray;
+    return arr;
   }
 }
 
-module.exports = Queue;
+module.exports = Queue
