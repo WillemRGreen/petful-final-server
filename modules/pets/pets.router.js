@@ -15,7 +15,6 @@ router.delete('/api/removecat', json, (req, res) => {
 });
 
 router.delete('/api/removedog', json, (req, res) => {
-  // Remove a pet from adoption.
   // People.dequeue();
   res.json(Pets.dequeue('dog'));
 });
