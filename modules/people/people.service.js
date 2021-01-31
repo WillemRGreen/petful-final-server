@@ -21,7 +21,6 @@ module.exports = {
 
   dequeue() {
     // Remove a person from the queue.
-    // WILL ALWAYS REMOVE FROM TOP OF QUEUE!!
     people.dequeue();
     return people.all();
   }
